@@ -29,6 +29,8 @@ A Model Context Protocol (MCP) server that provides tools and resources for mana
    export NEWS_API_KEY="your_key_here"
    ```
 
+   Alternatively, create a `.env` file in the root of the directory and store the API keys
+
 ## Usage
 
 ### Running the Server
@@ -37,7 +39,7 @@ You can run the server in two different modes:
 
 1. **Stdio Transport** (default, for Claude Desktop integration):
    ```bash
-   python main.py
+   python main.py   # alternate commands: i.e.) python3, python3.11
    ```
 
 2. **SSE Transport** (for HTTP-based clients):
@@ -53,7 +55,7 @@ Add the server to your Claude Desktop configuration file:
 {
   "mcpServers": {
     "portfolio-manager": {
-      "command": "python",
+      "command": "python",      // may use different command
       "args": ["/path/to/portfolio-manager-mcp/main.py"],
       "env": {
         "ALPHA_VANTAGE_API_KEY": "your_key_here",
@@ -63,6 +65,43 @@ Add the server to your Claude Desktop configuration file:
   }
 }
 ```
+
+If you choose to run your server in a virtual environment, then your configuration file will look like:
+
+```json
+{
+  "mcpServers": {
+    "portfolio-manager": {
+      "command": "/path/to/portfolio-manager-mcp/venv/bin/python",
+      "args": ["/path/to/portfolio-manager-mcp/main.py"],
+      "env": {
+        "PYTHONPATH": "/path/to/portfolio-manager-mcp",
+        "ALPHA_VANTAGE_API_KEY": "your_key_here",
+        "NEWS_API_KEY": "your_key_here"
+      }
+    }
+  }
+}
+```
+
+To run it in a virtual environment:
+
+```bash
+# Create a virtual environment
+python3 -m venv venv
+
+# Activate the virtual environment
+source venv/bin/activate  # On macOS/Linux
+# or
+# venv\Scripts\activate   # On Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the server
+python3 main.py
+```
+
 
 Or use the MCP CLI for easier installation:
 
