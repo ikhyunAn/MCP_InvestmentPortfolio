@@ -113,7 +113,7 @@ mcp install main.py
 
 Once the server is running and connected to Claude, you can interact with it using natural language:
 
-- "Create a portfolio with 30% AAPL, 20% MSFT, 15% AMZN, and 35% US Treasury bonds"
+- "Create a portfolio with 30% AAPL, 20% MSFT, 15% AMZN, and 35% US Treasury bonds with user Id <User_ID>"
 - "What's the recent performance of my portfolio?"
 - "Show me news about the stocks in my portfolio"
 - "Generate investment recommendations for my current portfolio"
@@ -141,6 +141,21 @@ portfolio-manager/
 │   └── server.py                # MCP server setup
 └── requirements.txt             # Dependencies
 ```
+
+## Future Work
+
+As of now, the MCP program uses manually created JSON file which keeps track of each user's investment portfolio.
+
+This should be fixed so that it reads in the portfolio data from actual banking applications.
+
+
+### Tasks
+
+- [ ] Extract JSON from a Finance or Banking Application which the user uses
+- [ ] Enable modifying the investment portfolio by the client
+- [ ] Implement automated portfolio rebalancing
+- [ ] Add support for cryptocurrency assets
+- [ ] Develop mobile application integration
 
 ## License
 
