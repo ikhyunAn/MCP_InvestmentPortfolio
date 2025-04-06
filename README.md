@@ -1,28 +1,108 @@
-# MCP Server for Investment Portfolio Management
+# Portfolio Manager MCP Server
 
-## Project Description
+A Model Context Protocol (MCP) server that provides tools and resources for managing and analyzing investment portfolios.
 
-This MCP server is designed to help users track, analyze, and optimize their investment portfolios, consisting of stocks and bonds. 
+## Features
 
-### What is MCP?
+- **Portfolio Management**: Create and update investment portfolios with stocks and bonds
+- **Market Data**: Fetch real-time stock price information and relevant news
+- **Analysis**: Generate comprehensive portfolio reports and performance analysis
+- **Recommendations**: Get personalized investment recommendations based on portfolio composition
+- **Visualization**: Create visual representations of portfolio allocation
 
-MCP stands for Model Context Protocol.
+## Installation
 
-| MCP is API interfaces exposed to AI. AI will by itself choose appropriate API interfaces, or methods, provided to them, and perform tasks on the user's local machine. 
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/ikhyunAn/portfolio-manager-mcp.git
+   cd portfolio-manager-mcp
+   ```
 
+2. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-To enable MCP, the user has to install both the client (Anthropic's Claude) and the server on the local machine. At its core, MCP follows a client-server architecture where a host application can connect to mulitiple servers to performs tasks.
+3. Set up API keys (optional):
+   ```bash
+   export ALPHA_VANTAGE_API_KEY="your_key_here"
+   export NEWS_API_KEY="your_key_here"
+   ```
 
-For this particular project, an MCP Server will be implemented which will ***manage investment portfolio***.
+## Usage
 
+### Running the Server
 
+You can run the server in two different modes:
 
-### MCP Server Functionalities:
+1. **Stdio Transport** (default, for Claude Desktop integration):
+   ```bash
+   python main.py
+   ```
 
-- Manage User Portfolios: Allow users to specify and update their portfolio items (stocks and bonds) along with their respective percentages.
-- Fetch Portfolio Updates: Gather recent stock price changes (e.g., from yesterday or the past week) using external financial APIs.
-- Aggregate Relevant News: Search the web for news related to the stocks in the user’s portfolio, using news APIs or web scraping.
-- Generate Portfolio Reports: Create a report explaining recent changes in the portfolio’s value based on stock price movements and relevant news.
-- Offer Investment Recommendations: Suggest adjustments to the portfolio based on the gathered data and analysis.
-- The server will expose these capabilities through MCP resources and tools, enabling integration with LLM clients to deliver natural language reports and recommendations.
+2. **SSE Transport** (for HTTP-based clients):
+   ```bash
+   python main.py --sse
+   ```
 
+### Integration with Claude Desktop
+
+Add the server to your Claude Desktop configuration file:
+
+```json
+{
+  "mcpServers": {
+    "portfolio-manager": {
+      "command": "python",
+      "args": ["/path/to/portfolio-manager-mcp/main.py"],
+      "env": {
+        "ALPHA_VANTAGE_API_KEY": "your_key_here",
+        "NEWS_API_KEY": "your_key_here"
+      }
+    }
+  }
+}
+```
+
+Or use the MCP CLI for easier installation:
+
+```bash
+mcp install main.py
+```
+
+## Example Queries
+
+Once the server is running and connected to Claude, you can interact with it using natural language:
+
+- "Create a portfolio with 30% AAPL, 20% MSFT, 15% AMZN, and 35% US Treasury bonds"
+- "What's the recent performance of my portfolio?"
+- "Show me news about the stocks in my portfolio"
+- "Generate investment recommendations for my current portfolio"
+- "Visualize my current asset allocation"
+
+## Project Structure
+
+```
+portfolio-manager/
+├── main.py                      # Entry point
+├── portfolio_server/            # Main package
+│   ├── api/                     # External API clients
+│   │   ├── alpha_vantage.py     # Stock market data API
+│   │   └── news_api.py          # News API
+│   ├── data/                    # Data management
+│   │   ├── portfolio.py         # Portfolio models
+│   │   └── storage.py           # Data persistence
+│   ├── resources/               # MCP resources
+│   │   └── portfolio_resources.py # Portfolio resource definitions
+│   ├── tools/                   # MCP tools
+│   │   ├── analysis_tools.py    # Portfolio analysis
+│   │   ├── portfolio_tools.py   # Portfolio management
+│   │   ├── stock_tools.py       # Stock data and news
+│   │   └── visualization_tools.py # Visualization tools
+│   └── server.py                # MCP server setup
+└── requirements.txt             # Dependencies
+```
+
+## License
+
+MIT
