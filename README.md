@@ -1,4 +1,5 @@
 # Portfolio Manager MCP Server
+[![smithery badge](https://smithery.ai/badge/@ikhyunAn/MCP_InvestmentPortfolio)](https://smithery.ai/server/@ikhyunAn/MCP_InvestmentPortfolio)
 
 A Model Context Protocol (MCP) server that provides tools and resources for managing and analyzing investment portfolios.
 
@@ -12,6 +13,15 @@ A Model Context Protocol (MCP) server that provides tools and resources for mana
 
 ## Installation
 
+### Installing via Smithery
+
+To install Portfolio Manager for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@ikhyunAn/MCP_InvestmentPortfolio):
+
+```bash
+npx -y @smithery/cli install @ikhyunAn/MCP_InvestmentPortfolio --client claude
+```
+
+### Manual Installation
 1. Clone this repository:
    ```bash
    git clone https://github.com/ikhyunAn/portfolio-manager-mcp.git
