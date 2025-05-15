@@ -1,0 +1,43 @@
+# Smithery configuration file: https://smithery.ai/docs/build/project-config
+
+startCommand:
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required: []
+    properties:
+      alphaVantageApiKey:
+        type: string
+        description: API key for Alpha Vantage
+      newsApiKey:
+        type: string
+        description: API key for News API
+      transport:
+        type: string
+        default: stdio
+        description: Transport type to use for MCP server
+      port:
+        type: number
+        description: Port to use for SSE or HTTP transport
+    description: Configuration for Portfolio Manager MCP Server
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => {
+      const env = {};
+      if (config.alphaVantageApiKey) env.ALPHA_VANTAGE_API_KEY = config.alphaVantageApiKey;
+      if (config.newsApiKey) env.NEWS_API_KEY = config.newsApiKey;
+      // Pass through port and transport args
+      const args = [];
+      if (config.transport && config.transport !== 'stdio') {
+        if (config.transport === 'sse') args.push('--sse');
+        else args.push(`--transport=${config.transport}`);
+      }
+      if (config.port) args.push(`--port=${config.port}`);
+      return { command: 'python', args: ['main.py', ...args], env };
+    }
+  exampleConfig:
+    alphaVantageApiKey: YOUR_ALPHA_VANTAGE_KEY
+    newsApiKey: YOUR_NEWS_API_KEY
+    transport: stdio
