@@ -36,6 +36,7 @@ def register_tools(mcp: FastMCP) -> None:
     
     mcp.tool()(stock_tools.get_stock_prices)
     mcp.tool()(stock_tools.get_stock_news)
+    mcp.tool()(stock_tools.search_stocks)
 
     mcp.tool()(analysis_tools.generate_portfolio_report)
     mcp.tool()(analysis_tools.get_investment_recommendations)
