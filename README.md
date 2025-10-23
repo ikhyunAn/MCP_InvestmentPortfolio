@@ -1,6 +1,14 @@
-[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/ikhyunan-mcp-investmentportfolio-badge.png)](https://mseep.ai/app/ikhyunan-mcp-investmentportfolio)
-
 # Portfolio Manager MCP Server
+<p align="center">
+  <img src="assets/logo.png" width="300" alt="Project Logo">
+</p>
+
+<p align="center">
+  <a href="https://mseep.ai/app/ikhyunan-mcp-investmentportfolio">
+    <img src="https://mseep.net/pr/ikhyunan-mcp-investmentportfolio-badge.png" alt="MseeP.ai Security Assessment Badge" />
+  </a>
+</p>
+
 
 A Model Context Protocol (MCP) server that provides tools and resources for managing and analyzing investment portfolios.
 
