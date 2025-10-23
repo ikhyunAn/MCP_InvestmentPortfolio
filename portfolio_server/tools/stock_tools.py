@@ -30,11 +30,11 @@ async def _fetch_stock_data_with_fallback(symbol: str, days: int) -> Dict[str, A
             # If data is still not available after searching
             if "Error Message" in data or "Time Series (Daily)" not in data:
                 return {
-                    "error": f"找不到股票数据。原始查询: {symbol}, 尝试使用的代码: {best_match}"
+                    "error": f"Stock Data Not Found. Original Query: {symbol}, Tried Symbol: {best_match}"
                 }
         else:
             return {
-                "error": f"找不到与 '{symbol}' 匹配的公司或股票代码"
+                "error": f"No Company or stock symbol matching '{symbol}' was found."
             }
     
     # Process successful data
@@ -65,7 +65,7 @@ async def _fetch_stock_data_with_fallback(symbol: str, days: int) -> Dict[str, A
             "percent_change": round(percent_change, 2)
         }
     
-    return {"error": "无法获取股票数据"}
+    return {"error": "Unable to obtain Stock Data"}
 
 async def get_stock_prices(symbols: List[str], days: int = 7) -> str:
     """
